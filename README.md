@@ -1,26 +1,26 @@
-# M-PESA Financial Engine & 2026 Forecasting Prototype
+# M-PESA Prototype
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 ![Status](https://img.shields.io/badge/Status-Proprietary-red)
 ![Version](https://img.shields.io/badge/Version-1.0.0-green)
 
 ## Project Overview
-This is a high-fidelity simulation of the M-PESA ecosystem, designed as a data-generation engine for **predictive financial forecasting**. The project replicates the core banking, crypto, and utility services of M-PESA while introducing advanced security layers and data-logging mechanisms.
+This is a high-fidelity simulation of the M-PESA ecosystem. The project replicates core banking, crypto, and utility services while introducing advanced security layers and high-resolution data logging.
 
-**Purpose:** To generate a clean, structured dataset (`mpesa_data_2026.csv`) to train machine learning models to predict liquidity trends and spending habits in the Kenyan market for the year 2026.
+**Purpose:** Building a "Better M-Pesa"
 
 ---
 
 ## Key Features
 
 ### 1. Financial Services Engine
-- **Cross-Platform Transfers:** Seamlessly move funds between M-PESA, major Kenyan banks (KCB, Equity, etc.), and Crypto Wallets.
+- **Cross-Platform Transfers:** Seamless funds movement between M-PESA, major Kenyan banks (KCB, Equity, etc.), and Crypto Wallets.
 - **Dynamic Asset Valuation:** Real-time (simulated) crypto rates for BTC/ETH/USDT with automated unit calculation.
 - **Lipa na M-PESA:** Support for Paybill, Till Numbers, and Pochi la Biashara.
 
 ### 2. Logic & Safety Guardrails
 - **The "Fat-Finger" Block:** Hard transaction limit of 500,000 KES to prevent data outliers and entry errors.
-- **Overdraft Protection:** Atomic balance checks for all assets (Bank, Crypto, and M-PESA) to prevent negative ledger entries.
+- **Overdraft Protection:** Atomic balance checks for all assets to prevent negative ledger entries.
 
 ### 3. Security Framework
 - **Session Lifecycle Management:** Automated 120-second inactivity timeout with memory cleanup (RAM wiping).
@@ -33,10 +33,18 @@ This is a high-fidelity simulation of the M-PESA ecosystem, designed as a data-g
 
 ---
 
-##  Tech Stack
+## 5. Forecasting Readiness (Data Pipeline)
+The engine is architected to ensure **high-resolution temporal data** for ML model training:
+- **Timestamp Precision:** All transactions are logged with ISO 8601 timestamps to support time-series analysis (ARIMA/LSTM).
+- **Feature Diversity:** Captured features include transaction type, volume, frequency, and merchant categories.
+- **Data Integrity:** A `file_integrity.hash` ensures that the simulation logic generating the data remains unchanged between experiments.
+
+---
+
+## Tech Stack
 - **Language:** Python 3.x
 - **Storage:** JSON (State management), CSV (Transaction Logs)
-- **Security:** stdiomask, getpass
+- **Security:** `stdiomask`, `getpass`
 - **Architecture:** Modular OOP (Models, Engine, Security, Dashboard)
 
 ---
@@ -49,10 +57,18 @@ This software and its underlying logic are **proprietary**. No part of this repo
 
 ## Project Structure
 ```text
-├── main.py           # App Entry Point & Menu Logic
-├── engine.py         # Core Financial Logic & Balance Checks
-├── models.py         # User & Account Class Definitions
-├── security.py       # Auth & Session Management
-├── dashboard.py      # Analytics & Monthly Reporting
-├── data_logger.py    # CSV Transaction Recording
-└── secret.json       # (Ignored) User Secrets & PINs
+├── main.py              # App Entry Point & Menu Logic
+├── engine.py            # Core Financial Logic & Smart Guardrails
+├── models.py            # User & Account Class Definitions
+├── security.py          # Auth, Session Wiping & Masking logic
+├── dashboard.py         # 2026 Analytics & Dynamic Reporting
+├── data_logger.py       # ML-Ready CSV Transaction Recording
+├── statement_service.py # Dynamic Mpesa Full Statment in PDF Generation (Non-hardcoded)
+├── sync_rates.py        # Real-time Crypto Rate Integration
+├── setup.py             # Package Configuration & Metadata
+├── requirements.txt     # Pinned Dependencies for Reproducibility
+├── .gitignore           # Security: Prevents leak of secrets/data
+├── file_integrity.hash  # SHA-256 Checksums for Logic Verification
+├── README.md            # Project Vision & Documentation
+├── hakikisha.json       # (Ignored) Identity Cache: Name-Lookup Verification
+└── secret.json          # (Ignored) Local Dev Credentials & PINs
