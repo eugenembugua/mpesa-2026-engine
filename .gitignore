@@ -1,0 +1,22 @@
+#Security & Secrets
+secret.json
+hakikisha.json
+
+#Data
+*.csv
+*.log
+*.pdf
+
+#Virtual enviroonment
+__pycache__/
+*.py[cod]
+*$py.class
+mpesa-venv
+
+
+#OS Specific
+.DS_Store
+Thumbs.db
+
+#Build & Distribution
+*.egg-info/
